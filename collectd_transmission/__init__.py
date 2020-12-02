@@ -127,6 +127,7 @@ def get_stats():
     for category, catmetrics in metrics.items():
         for metric, attrs in catmetrics.items():
             vl = collectd.Values(type=attrs['type'],
+                                 plugin_instance='%s-%s' % (category, metric),
                                  plugin=PLUGIN_NAME,
                                  type_instance='%s-%s' % (category, metric))
             vl.dispatch(values=[field_getter(stats, metric, category)])
